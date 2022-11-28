@@ -1,6 +1,12 @@
 /*styles.css*/
 * {
   box-sizing: border-box;
+  
+
+}
+
+* ::-webkit-scrollbar { 
+  display: none;  /* Safari and Chrome */
 }
 
 html,
