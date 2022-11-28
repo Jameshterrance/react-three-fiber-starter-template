@@ -147,6 +147,8 @@ export default function App() {
         <ContactPage />
 
         <AboutSection ref={(el) => (abstergoRef.current = el)} />
+
+        <PointLightSection />
       </Canvas>
     </div>
   );
