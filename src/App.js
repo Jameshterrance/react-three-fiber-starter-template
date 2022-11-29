@@ -1,36 +1,30 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Canvas, useFrame, extend, useThree } from "@react-three/fiber";
-import { Box, OrbitControls, Ring, Stars } from "@react-three/drei";
+import { MeshReflectorMaterial, MeshRefractionMaterial, OrbitControls, Ring, Stars } from "@react-three/drei";
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer";
 import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass";
 import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass";
 import "./styles.css";
 import { gsap } from "gsap/all";
+import { Boxes } from './components/Effects&Objects/Boxes'
 import FeaturedProjects from "./components/FeaturedProjects/FeaturedProjects";
 import SolarSystem from "./components/SkillObject/SolarSystem";
 import ContactPage from "./components/ContactPage/ContactPage";
 import ContactPageTest from "./components/ContactPage/ContactPageTest";
 import AboutSection from "./components/AboutSection/AboutSection";
 import { MathUtils } from "three";
+import PointLightSection from './components/PointLightSection/PointLightSection'
+import { BackLight, FillLight, KeyLight } from "./components/Effects&Objects/Lights";
+import KaiLandingAI from "./components/KaiSection/KaiSection";
 extend({ EffectComposer, RenderPass, UnrealBloomPass });
-const KaiLandingAI = () => {
-  const scene = useRef();
 
-  useFrame(() => {
-    scene.current.position.y = Math.sin(45);
-  });
-  return (
-    <group ref={scene} position={[0, 0, 0]}>
-      <mesh scale={2}>
-        <ringGeometry args={[3, 4, 120, 30]} />
-        <meshBasicMaterial color={"#fff"} />
-      </mesh>
-    </group>
-  );
-};
 
 export default function App() {
   const abstergoRef = useRef();
+  const cubeRef = useRef();
+  const kaiRef = useRef()
+  const SolarRef = useRef()
+  const boxRef = useRef()
 
   function Rig() {
     const { camera } = useThree();
@@ -49,6 +43,7 @@ export default function App() {
           pin: true,
         },
       });
+
 
       timeline
         .to(camera.position, {
@@ -112,7 +107,18 @@ export default function App() {
           y: -460,
           duration: 4,
           immediateRender: false,
-        });
+        })
+        .to(camera.position, {
+          y: -540,
+          duration: 4,
+          immediateRender: false,
+        })
+      // .to(cubeRef.current.rotation, {
+      //   y: MathUtils.degToRad(360),
+      //   z: MathUtils.degToRad(360),
+      //   duration: 6,
+      //   immediateRender: false,
+      // });
     }, []);
 
     return camera.position;
@@ -121,7 +127,7 @@ export default function App() {
   return (
     <div className="home_container">
       <Canvas style={{ width: "100vw", height: "100vh" }}>
-        <directionalLight intensity={0.5} />
+        {/* <directionalLight intensity={0.5} /> */}
         <Stars
           radius={500}
           depth={50}
@@ -131,11 +137,13 @@ export default function App() {
           fade
           speed={1}
         />
-        <ambientLight />
+        <ambientLight color={'#FF69B4'} />
+        {/* <Boxes ref={boxRef} position={[1, 44, 0]} /> */}
+
         {/* <OrbitControls /> */}
         <Rig />
         {/* section 1 */}
-        <KaiLandingAI />
+        <KaiLandingAI ref={kaiRef} />
         {/* section 2 */}
         <FeaturedProjects />
 
@@ -148,7 +156,8 @@ export default function App() {
 
         <AboutSection ref={(el) => (abstergoRef.current = el)} />
 
-        <PointLightSection />
+        <PointLightSection ref={cubeRef} />
+        {/* <Boxes /> */}
       </Canvas>
     </div>
   );

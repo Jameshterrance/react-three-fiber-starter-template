@@ -89,6 +89,7 @@ const SolarSystem = React.forwardRef((props, ref) => {
     );
   };
 
+
   const FakeGlobe = (props) => {
     return (
       <group>
