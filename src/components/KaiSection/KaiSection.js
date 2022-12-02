@@ -43,7 +43,7 @@ const KaiShaderMaterial = shaderMaterial(
     varying vec2 vUv;
 
     void main () {
-        gl_FragColor = vec4(sin(vUv.x + uTime ) * uColor, 1.0);
+        gl_FragColor = vec4(sin(vUv.y + uTime ) * uColor, 1.0);
     }`
 )
 extend({ KaiShaderMaterial })
@@ -69,8 +69,8 @@ const KaiLandingAI = () => {
                 <BackLight />
                 <KeyLight />
                 <mesh scale={2} >
-                    <ringGeometry args={[3, 4, 120, 120]} />
-                    <kaiShaderMaterial uColor={"#ff1818"} ref={ref} wireframe={false} />
+                    <torusGeometry args={[10, 1, 16, 100]} />
+                    <kaiShaderMaterial uColor={"#ff1818"} ref={ref} wireframe={true} />
                 </mesh>
             </group>
         </Suspense>

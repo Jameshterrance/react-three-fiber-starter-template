@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { Canvas, useFrame, extend, useThree } from "@react-three/fiber";
 import { MeshReflectorMaterial, MeshRefractionMaterial, OrbitControls, Ring, Stars } from "@react-three/drei";
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer";
@@ -16,6 +16,9 @@ import { MathUtils } from "three";
 import PointLightSection from './components/PointLightSection/PointLightSection'
 import { BackLight, FillLight, KeyLight } from "./components/Effects&Objects/Lights";
 import KaiLandingAI from "./components/KaiSection/KaiSection";
+import Globe from "./components/Earth/Globe";
+import Ripple from "./components/Effects&Objects/Ripple";
+
 extend({ EffectComposer, RenderPass, UnrealBloomPass });
 
 
@@ -126,39 +129,44 @@ export default function App() {
 
   return (
     <div className="home_container">
-      <Canvas style={{ width: "100vw", height: "100vh" }}>
-        {/* <directionalLight intensity={0.5} /> */}
-        <Stars
-          radius={500}
-          depth={50}
-          count={10000}
-          factor={6}
-          saturation={0}
-          fade
-          speed={1}
-        />
-        <ambientLight color={'#FF69B4'} />
-        {/* <Boxes ref={boxRef} position={[1, 44, 0]} /> */}
+      <Suspense fallback={null}>
+        <Canvas style={{ width: "100vw", height: "100vh" }}>
+          <directionalLight intensity={0.5} />
+          <Stars
+            radius={500}
+            depth={50}
+            count={10000}
+            factor={6}
+            saturation={0}
+            fade
+            speed={1}
+          />
+          {/* color={'#FF69B4'} */}
+          {/* <ambientLight /> */}
+          {/* <Globe /> */}
+          {/* <Boxes ref={boxRef} position={[1, 44, 0]} /> */}
+          {/* <Ripple /> */}
 
-        {/* <OrbitControls /> */}
-        <Rig />
-        {/* section 1 */}
-        <KaiLandingAI ref={kaiRef} />
-        {/* section 2 */}
-        <FeaturedProjects />
+          {/* <OrbitControls /> */}
+          <Rig />
+          {/* section 1 */}
+          <KaiLandingAI ref={kaiRef} />
+          {/* section 2 */}
+          {/* <FeaturedProjects /> */}
 
-        {/* section 3 */}
-        {/* <SolarSystem ref={SolarRef} /> */}
+          {/* section 3 */}
+          {/* <SolarSystem ref={SolarRef} /> */}
 
-        {/* section 4 */}
+          {/* section 4 */}
 
-        <ContactPage />
+          {/* <ContactPage /> */}
 
-        <AboutSection ref={(el) => (abstergoRef.current = el)} />
+          {/* <AboutSection ref={(el) => (abstergoRef.current = el)} /> */}
 
-        <PointLightSection ref={cubeRef} />
-        {/* <Boxes /> */}
-      </Canvas>
+          {/* <PointLightSection ref={cubeRef} /> */}
+          {/* <Boxes /> */}
+        </Canvas>
+      </Suspense>
     </div>
   );
 }
