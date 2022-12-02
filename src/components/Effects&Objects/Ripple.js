@@ -15,7 +15,7 @@ const Ripple = () => {
         }
     }, [])
     return (
-        <group>
+        <group position={[0, -80, 0]}>
             <directionalLight position={[0, -10, 0]} intensity={'10'} />
             <mesh>
                 <sphereGeometry args={[9, 30, 30]} ref={ref} />

@@ -145,12 +145,12 @@ export default function App() {
           {/* <ambientLight /> */}
           {/* <Globe /> */}
           {/* <Boxes ref={boxRef} position={[1, 44, 0]} /> */}
-          {/* <Ripple /> */}
 
           {/* <OrbitControls /> */}
           <Rig />
           {/* section 1 */}
           <KaiLandingAI ref={kaiRef} />
+          <Ripple />
           {/* section 2 */}
           {/* <FeaturedProjects /> */}
 

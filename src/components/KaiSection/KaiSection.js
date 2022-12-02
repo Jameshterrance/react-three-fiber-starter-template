@@ -69,8 +69,8 @@ const KaiLandingAI = () => {
                 <BackLight />
                 <KeyLight />
                 <mesh scale={2} >
-                    <torusGeometry args={[10, 1, 16, 100]} />
-                    <kaiShaderMaterial uColor={"#ff1818"} ref={ref} wireframe={true} />
+                    <torusGeometry args={[10, 1, 16, 13]} />
+                    <kaiShaderMaterial uColor={"#a1b3d3"} ref={ref} wireframe={true} />
                 </mesh>
             </group>
         </Suspense>
